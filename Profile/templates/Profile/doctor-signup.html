@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="{% static 'styles/doctor-signup.css' %}" />
+    <title>Doctor Signup</title>
+  </head>
+  <body>
+    <div class="article">
+       <div class="gap"></div>
+      <div class="container">
+        <form method="POST" action="{% url 'doctor-signup' %}" id="form" class="form">
+          {% csrf_token %}
+          <h2>Doctor Registration</h2>
+          {% for field in form %}
+          <div class="form-control">
+            <label for="username">{{field.label}}</label>
+            {{field}}
+            {% for error in field.errors %}
+              <p style="color:red;"> {{error}} </p>
+            {% endfor %}
+<!--            <input type="text" id="username" placeholder="Enter username" />-->
+<!--            <small>Error message</small>-->
+          </div>
+          {% endfor %}
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
+
+<!--    <script src="script.js"></script>-->
+  </body>
+</html>
