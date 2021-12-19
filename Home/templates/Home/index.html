@@ -1,44 +1,45 @@
 <!DOCTYPE html>
+{% load static %}
+{% load custom_tags %}
     <html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" type="image/x-icon">
         <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
-        <link rel="stylesheet" href="assets/css/styles.css">
-
+        <link href="{% static 'styles/styles.css' %}" media="screen" rel="stylesheet" type="text/css">
         <title>DocTalk</title>
     </head>
     <body>
         <!--==================== HEADER ====================-->
         <header class="header" id="header">
             <nav class="nav container">
-                <a href="#" class="nav__logo">
+                <a href="{% url 'home' %}" class="nav__logo">
                     <i class="ri-hospital-line"></i> DocTalk
                 </a>
 
                 <div class="nav__menu" id="nav-menu">
                     <ul class="nav__list">
                         <li class="nav__item">
-                            <a href="#home" class="nav__link active-link">Home</a>
+                            <a href="{% url 'home' %}" class="nav__link active-link" id="homeid">Home</a>
                         </li>
                         <li class="nav__item">
-                            <a href="#about" class="nav__link">About</a>
+                            <a href="{% anchor 'home' 'about' %}" class="nav__link" id="aboutid">About</a>
+                        </li>
+<!--                        <li class="nav__item">-->
+<!--                            <a href="{% anchor 'home' 'about' %}" class="nav__link">Doctors</a>-->
+<!--                        </li>-->
+                        <li class="nav__item">
+                            <a href="{% anchor 'home' 'products' %}" class="nav__link" id="productsid">Products</a>
                         </li>
                         <li class="nav__item">
-                            <a href="#" class="nav__link">Doctors</a>
+                            <a href="{% url 'blogs' %}" class="nav__link">Blogs</a>
                         </li>
                         <li class="nav__item">
-                            <a href="#products" class="nav__link">Products</a>
+                            <a href="{% anchor 'home' 'faqs' %}" class="nav__link" id="faqsid">FAQs</a>
                         </li>
                         <li class="nav__item">
-                            <a href="#" class="nav__link">Blogs</a>
-                        </li>
-                        <li class="nav__item">
-                            <a href="#faqs" class="nav__link">FAQs</a>
-                        </li>
-                        <li class="nav__item">
-                            <a href="#contact" class="nav__link">Contact Us</a>
+                            <a href="{% anchor 'home' 'contact' %}" class="nav__link" id="contactid">Contact Us</a>
                         </li>
                     </ul>
 
@@ -62,7 +63,7 @@
             <!--==================== HOME ====================-->
             <section class="home" id="home">
                 <div class="home__container container grid">
-                    <img src="assets/img/cover_1.png" alt="" class="home__img">
+                    <img src="{% static 'images/cover_1.png' %}" alt="" class="home__img">
 
                     <div class="home__data">
                         <h1 class="home__title">
@@ -71,7 +72,7 @@
                         <p class="home__description">
                             DocTalk enables you to speak with experienced and licensed specialist doctors instantly at any time of the day.
                         </p>
-                        <a href="#about" class="button button--flex">
+                        <a href="" class="button button--flex">
                             Explore
                         </a>
                     </div>
@@ -97,7 +98,7 @@
             <!--==================== ABOUT ====================-->
             <section class="about section container" id="about">
                 <div class="about__container grid">
-                    <img src="assets/img/about_3.png" alt="" class="about__img">
+                    <img src="{% static 'images/about_3.png' %}" alt="" class="about__img">
 
                     <div class="about__data">
                         <h2 class="section__title about__title">
@@ -105,7 +106,7 @@
                         </h2>
 
                         <p class="about__description">
-                            DocTalk is the best way to seek medical help.To make it seamless and smooth we beat challenges everyday to ensure easy access to doctors for thousand people. 
+                            DocTalk is the best way to seek medical help.To make it seamless and smooth we beat challenges everyday to ensure easy access to doctors for thousand people.
                         </p>
 
                         <div class="about__details">
@@ -140,7 +141,7 @@
                     <div class="steps__container grid">
                         <div class="steps__card">
                             <div class="steps__card-number"><i class="ri-chat-1-fill"></i></div>
-                            <h3 class="steps__card-title">Messaing</h3>
+                            <h3 class="steps__card-title">Messaging</h3>
                             <p class="steps__card-description">
                                 Choose your doctor and give a HI to him.
                             </p>
@@ -177,9 +178,9 @@
 
                 <div class="product__container grid">
                     <article class="product__card">
-                     
 
-                        <img src="assets/img/product1.jpg" alt="" class="product__img">
+
+                        <img src="{% static 'images/product1.jpg' %}" alt="" class="product__img">
 
                         <h3 class="product__title">Accu-Chek Active Blood Glucose Meter</h3>
                         <span class="product__price">৳ 2395</span>
@@ -190,9 +191,9 @@
                     </article>
 
                     <article class="product__card">
-                      
 
-                        <img src="assets/img/product2.png" alt="" class="product__img">
+
+                        <img src="{% static 'images/product2.png' %}" alt="" class="product__img">
 
                         <h3 class="product__title">Consonantia</h3>
                         <span class="product__price">৳ 1020</span>
@@ -203,9 +204,9 @@
                     </article>
 
                     <article class="product__card">
-                        
 
-                        <img src="assets/img/product3.jpg" alt="" class="product__img">
+
+                        <img src="{% static 'images/product3.jpg' %}" alt="" class="product__img">
 
                         <h3 class="product__title">Avagard Hand Sanitizer</h3>
                         <span class="product__price">৳ 750</span>
@@ -216,9 +217,9 @@
                     </article>
 
                     <article class="product__card">
-                       
 
-                        <img src="assets/img/product4.jpg" alt="" class="product__img">
+
+                        <img src="{% static 'images/product4.jpg' %}" alt="" class="product__img">
 
                         <h3 class="product__title">Digital BP Check Machine</h3>
                         <span class="product__price">৳ 1200</span>
@@ -229,9 +230,9 @@
                     </article>
 
                     <article class="product__card">
-                    
 
-                        <img src="assets/img/product5.jpg" alt="" class="product__img">
+
+                        <img src="{% static 'images/product5.jpg' %}" alt="" class="product__img">
 
                         <h3 class="product__title">Minoxodil Liquid - Kirkland 5%</h3>
                         <span class="product__price">৳ 1250</span>
@@ -242,9 +243,9 @@
                     </article>
 
                     <article class="product__card">
-                        
 
-                        <img src="assets/img/product6.jpg" alt="" class="product__img">
+
+                        <img src="{% static 'images/product6.jpg' %}" alt="" class="product__img">
 
                         <h3 class="product__title">Centrum for Women</h3>
                         <span class="product__price">৳ 3000</span>
@@ -257,7 +258,7 @@
                             Shop Now <i class="ri-arrow-right-down-line button__icon"></i>
                         </a>
                 </div>
-                
+
             </section>
 
             <!--==================== QUESTIONS ====================-->
@@ -364,7 +365,7 @@
             </section>
 
             <!--==================== CONTACT ====================-->
-            <section class="contact section container" id="contact">                
+            <section class="contact section container" id="contact">
                 <div class="contact__container grid">
                     <div class="contact__box">
                         <h2 class="section__title">
@@ -403,7 +404,7 @@
                             </div>
 
                             <div class="contact__content contact__area">
-                                <textarea name="message" placeholder=" " class="contact__input"></textarea>                              
+                                <textarea name="message" placeholder=" " class="contact__input"></textarea>
                                 <label for="" class="contact__label">Message</label>
                             </div>
                         </div>
@@ -421,7 +422,7 @@
         <footer class="footer section">
             <div class="footer__container container grid">
                 <div class="footer__content">
-                    <a href="#" class="footer__logo">
+                    <a href="" class="footer__logo">
                          <i class="ri-hospital-line"></i> DOCTALK
                     </a>
 
@@ -454,7 +455,7 @@
 
                     <ul class="footer__data">
                         <li class="footer__information">+880 130 378 8797</li>
-                        
+
                         <div class="footer__social">
                             <a href="https://www.facebook.com/" class="footer__social-link">
                                 <i class="ri-facebook-fill"></i>
@@ -475,21 +476,21 @@
                     </h3>
 
                     <div class="footer__cards">
-                        <img src="assets/img/bkash.png" alt="" class="footer__card">
-                        <img src="assets/img/nagad.png" alt="" class="footer__card">
-                        <img src="assets/img/rocket.png" alt="" class="footer__card">
-                        <img src="assets/img/surecash.png" alt="" class="footer__card">
+                        <img src="{% static 'images/bkash.png' %}" alt="" class="footer__card">
+                        <img src="{% static 'images/nagad.png' %}" alt="" class="footer__card">
+                        <img src="{% static 'images/rocket.png' %}" alt="" class="footer__card">
+                        <img src="{% static 'images/surecash.png' %}" alt="" class="footer__card">
                     </div>
                 </div>
             </div>
 
-            <p class="footer__copy">&#169; DocTalk. All rigths reserved</p>
+            <p class="footer__copy">&#169; DocTalk. All rights reserved</p>
         </footer>
 
         <!--=============== SCROLL REVEAL ===============-->
-        <script src="assets/js/scrollreveal.min.js"></script>
-        
+        <script src="{% static 'js/scrollreveal.min.js' %}"></script>
+
         <!--=============== MAIN JS ===============-->
-        <script src="assets/js/main.js"></script>
+        <script src="{% static 'js/main.js' %}"></script>
     </body>
 </html>
