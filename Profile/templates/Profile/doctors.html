@@ -4,7 +4,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>DocTalk</title>
+    <title>Our Doctors</title>
     <!-- font-awesome -->
     <link
       rel="stylesheet"
@@ -22,67 +22,27 @@
       </div>
       <!-- filter buttons -->
       <div class="btn-container">
-        <!-- <button type="button" class="filter-btn" data-id="all">all</button>
-        <button type="button" class="filter-btn" data-id="Immunologist">
-          Immunologist
-        </button>
-        <button type="button" class="filter-btn" data-id="Meidicine">Meidicine</button>
-        <button type="button" class="filter-btn" data-id="Neurologist">
-          Neurologist
-        </button> -->
       </div>
       <!-- menu items -->
       <div class="section-center">
         <!-- single item -->
+        {% for doctor in doctors %}
         <article class="menu-item">
-          <img src="./menu-item.jpg" alt="menu item" class="photo" />
+          <img src="{{ doctor.doc_image.url }}" alt="" class="photo" />
           <div class="item-info">
             <header>
-              <h4>Dr. Zabir Raihan</h4>
+              <h4>{{doctor.name}}</h4>
             </header>
             <p class="item-text">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Repudiandae, sint quam. Et reprehenderit fugiat nesciunt inventore
-              laboriosam excepturi! Quo, officia.
+              Descriptions.
             </p>
           </div>
         </article>
-        <!-- end of single item -->
-        <!-- single item -->
-        <article class="menu-item">
-          <img src="./menu-item.jpg" alt="menu item" class="photo" />
-          <div class="item-info">
-            <header>
-              <h4>buttermilk pancakes</h4>
-              <h4 class="price">$15</h4>
-            </header>
-            <p class="item-text">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Repudiandae, sint quam. Et reprehenderit fugiat nesciunt inventore
-              laboriosam excepturi! Quo, officia.
-            </p>
-          </div>
-        </article>
-        <!-- end of single item -->
-        <!-- single item -->
-        <article class="menu-item">
-          <img src="./menu-item.jpg" alt="menu item" class="photo" />
-          <div class="item-info">
-            <header>
-              <h4>buttermilk pancakes</h4>
-              <h4 class="price">$15</h4>
-            </header>
-            <p class="item-text">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Repudiandae, sint quam. Et reprehenderit fugiat nesciunt inventore
-              laboriosam excepturi! Quo, officia.
-            </p>
-          </div>
-        </article>
+        {% endfor %}
         <!-- end of single item -->
       </div>
     </section>
     <!-- javascript -->
-    <script src="{% static 'js/doctors.js' %}"></script>
+<!--    <script src="{% static 'js/doctors.js' %}"></script>-->
   </body>
 </html>

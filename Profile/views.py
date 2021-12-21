@@ -1,9 +1,9 @@
 from django.contrib import messages
-from django.contrib.auth import login
+from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 from django.urls import reverse
-from .models import Patient, Doctor
+from .models import Patient, Doctor, CustomUser
 from .forms import CustomUserCreationForm, DoctorCreationForm, PatientCreationForm
 
 
@@ -65,4 +65,29 @@ def signupPatient(request):
             messages.error(request, 'An error has occurred during registration.')
     context = {'form': form}
     return render(request, 'Profile/patient-signup.html', context)
+
+
+def userLogin(request):
+    if request.method == "POST":
+        email = request.POST.get('email')
+        password = request.POST.get('pass')
+        try:
+            user = CustomUser.objects.get(email=email)
+        except:
+            messages.error(request, 'Email does not exist!')
+            return render(request, 'Profile/login.html')
+        user = authenticate(request, email=email, password=password)
+        if user is None:
+            messages.error(request, "Email or Password is incorrect!")
+        else:
+            login(request, user)
+            return redirect('doctors')
+    return render(request, 'Profile/login.html')
+
+
+def userLogout(request):
+    logout(request)
+    messages.info(request, 'You were logged out!')
+    return redirect('login')
+
 

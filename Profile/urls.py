@@ -9,4 +9,6 @@ urlpatterns = [
     path('patient/<str:pk>/', views.singlePatient, name="patient"),
     path('doctor-signup', views.signupDoctor, name="doctor-signup"),
     path('patient-signup', views.signupPatient, name="patient-signup"),
+    path('login', views.userLogin, name="login"),
+    path('logout', views.userLogout, name="logout"),
 ]

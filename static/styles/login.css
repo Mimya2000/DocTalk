@@ -24,16 +24,15 @@ body {
 }
 
 .container {
-  background-color: rgb(170, 233, 224);
+  background-color: rgb(144, 202, 249);
   border-radius: 5px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
   width: 600px;
 }
 
 .gap {
-  width: 400px;
-  height: 500px;
-  background-image: url(./pic.png);
+  width: 426px;
+  background-image: url(../images/login-def.jpg);
   border-radius: 5px;
 }
 
@@ -44,6 +43,7 @@ h2 {
 
 .form {
   padding: 30px 40px;
+  min-height: 500px;
 }
 
 .form-control {
