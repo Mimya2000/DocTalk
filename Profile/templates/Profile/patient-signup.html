@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="{% static 'styles/patient-signup.css' %}" />
+    <title>Patient Signup</title>
+  </head>
+  <body>
+    <div class="article">
+       <div class="gap"></div>
+    <div class="container">
+      <form method="POST" action="{% url 'patient-signup' %}" id="form" class="form">
+        {% csrf_token %}
+        <h2>Patient Registration</h2>
+          {% for field in form %}
+            <div class="form-control">
+            <label>{{field.label}}</label>
+              {{field}}
+<!--              <div class="error"></div>-->
+               <small>message</small>
+            {% for error in field.errors %}
+              <p style="color: red; font-size: 12px; line-height: 0em;"> {{error}} </p>
+            {% endfor %}
+            </div>
+          {% endfor %}
+          <button type="submit">Register</button>
+      </form>
+    </div>
+    </div>
+
+<!--    <script src="{% static 'js/alert_patient.js' %}"></script>-->
+  </body>
+</html>
