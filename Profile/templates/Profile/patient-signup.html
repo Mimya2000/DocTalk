@@ -27,6 +27,8 @@
             </div>
           {% endfor %}
           <button type="submit">Register</button>
+          <p>Are you a Doctor? <a href="{% url 'doctor-signup' %}" style="color: #008080; font-size: 18px; font-weight: bold; text-decoration: none;">Register as a Doctor</a></p>
+          <p>Already have an account? <a href="{% url 'login' %}" style="color: #008080; font-size: 18px; font-weight: bold; text-decoration: none;">Login</a></p>
       </form>
     </div>
     </div>

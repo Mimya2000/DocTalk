@@ -79,20 +79,15 @@ function scrollActive(){
               sectionId = current.getAttribute('id')
 
         if(scrollY > sectionTop && scrollY <= sectionTop + sectionHeight){
-//            var url = "{% anchor 'home' '123' %}"
-//            url.replace('123', sectionId)
-//            if(sectionId == 'home'){
-//                url = "{% url 'home' %}
-//            }
-            document.querySelector('#' + sectionId + 'id').classList.add('active-link')
+            document.querySelector('.nav__menu a[href*=' + sectionId + ']').classList.add('active-link')
         }else{
-            document.querySelector('#' + sectionId + 'id').classList.remove('active-link')
+            document.querySelector('.nav__menu a[href*=' + sectionId + ']').classList.remove('active-link')
         }
     })
 }
 window.addEventListener('scroll', scrollActive)
 
-/*=============== SHOW SCROLL UP ===============*/
+/*=============== SHOW SCROLL UP ===============*/ 
 function scrollUp(){
     const scrollUp = document.getElementById('scroll-up');
     // When the scroll is higher than 400 viewport height, add the show-scroll class to the a tag with the scroll-top class
@@ -100,7 +95,7 @@ function scrollUp(){
 }
 window.addEventListener('scroll', scrollUp)
 
-/*=============== DARK LIGHT THEME ===============*/
+/*=============== DARK LIGHT THEME ===============*/ 
 const themeButton = document.getElementById('theme-button')
 const darkTheme = 'dark-theme'
 const iconTheme = 'ri-sun-line'

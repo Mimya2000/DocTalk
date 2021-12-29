@@ -33,6 +33,26 @@ class DoctorCreationForm(UserCreationForm):
             'reg_num': 'Registration Number',
         }
 
+        def __init__(self, *args, **kwargs):
+            super(DoctorCreationForm, self).__init__(*args, **kwargs)
+            self.fields['name'].widget.attrs.update(
+                {'class': 'form-control', 'id': 'name', 'placeholder': 'Enter your name', 'style': 'color: #2F4F4F;'})
+            self.fields['email'].widget.attrs.update(
+                {'class': 'form-control', 'id': 'email', 'placeholder': 'Enter your Email Address',
+                 'style': 'color: #2F4F4F;'})
+            self.fields['phone'].widget.attrs.update(
+                {'class': 'form-control', 'id': 'phone', 'placeholder': 'Enter your Phone Number',
+                 'style': 'color: #2F4F4F;'})
+            self.fields['reg_num'].widget.attrs.update(
+                {'class': 'form-control', 'id': 'reg_num', 'placeholder': 'Enter your Registration Number',
+                 'style': 'color: #2F4F4F;'})
+            self.fields['password1'].widget.attrs.update(
+                {'class': 'form-control', 'id': 'password', 'placeholder': 'Enter your Password',
+                 'style': 'color: #2F4F4F;'})
+            self.fields['password2'].widget.attrs.update(
+                {'class': 'form-control', 'id': 'password2', 'placeholder': 'Confirm your Password',
+                 'style': 'color: #2F4F4F;'})
+
 
 class PatientCreationForm(UserCreationForm):
     class Meta:

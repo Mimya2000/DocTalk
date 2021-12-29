@@ -33,10 +33,11 @@
           </div>
           {% endfor %}
           <button type="submit">Register</button>
+          <p>Already have an account? <a href="{% url 'login' %}" style="color: #008080; font-size: 18px; font-weight: bold; text-decoration: none;">Login</a></p>
         </form>
       </div>
     </div>
 
-    <script src="{% static 'js/alert.js' %}"></script>
+<!--    <script src="{% static 'js/alert.js' %}"></script>-->
   </body>
 </html>
