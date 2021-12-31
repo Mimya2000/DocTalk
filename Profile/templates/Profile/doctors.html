@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Our Doctors</title>
+    <!-- font-awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+    />
+    <!-- styles -->
+    <link rel="stylesheet" href="{% static 'styles/doctors.css' %}" />
+  </head>
+  <body>
+    <section class="menu">
+      <!-- title -->
+      <div class="title">
+        <h2>Our Doctors</h2>
+        <div class="underline"></div>
+      </div>
+      <!-- filter buttons -->
+      <div class="btn-container">
+      </div>
+      <!-- menu items -->
+      <div class="section-center">
+        <!-- single item -->
+        {% for doctor in doctors %}
+        <article class="menu-item">
+          <img src="{{ doctor.doc_image.url }}" alt="" class="photo" />
+          <div class="item-info">
+            <header>
+              <h4>{{doctor.name}}</h4>
+            </header>
+            <p class="item-text">
+              Descriptions.
+            </p>
+          </div>
+        </article>
+        {% endfor %}
+        <!-- end of single item -->
+      </div>
+    </section>
+    <!-- javascript -->
+<!--    <script src="{% static 'js/doctors.js' %}"></script>-->
+  </body>
+</html>
