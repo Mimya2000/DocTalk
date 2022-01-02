@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from .models import Patient, Doctor, CustomUser
-from .forms import CustomUserCreationForm, DoctorCreationForm, PatientCreationForm
+from .forms import CustomUserCreationForm, DoctorCreationForm, PatientCreationForm, DoctorForm, PatientForm
 from datetime import date
 from django.contrib.auth.decorators import login_required
 
@@ -20,7 +20,7 @@ def account(request):
     if request.user.is_doctor:
         doctorObj = request.user.doctor
         context = {'doctor': doctorObj}
-        return render(request, 'Profile/doctor-profile.html', context)
+        return render(request, 'Profile/doctor-account.html', context)
     else:
         patientObj = request.user.patient
         today = date.today()
@@ -30,7 +30,29 @@ def account(request):
         else:
             age = today.year - born.year - ((today.month, today.day) < (born.month, born.day))
         context = {'patient': patientObj, 'age': age}
-        return render(request, 'Profile/patient-profile.html', context)
+        return render(request, 'Profile/patient-account.html', context)
+
+
+@login_required(login_url='login')
+def editAccount(request):
+    if request.user.is_doctor:
+        doctorObj = request.user.doctor
+        form = DoctorForm(instance=doctorObj)
+        if request.method == 'POST':
+            form = DoctorForm(request.POST, request.FILES, instance=doctorObj)
+            if form.is_valid():
+                form.save()
+                return redirect('account')
+    else:
+        patientObj = request.user.patient
+        form = PatientForm(instance=patientObj)
+        if request.method == 'POST':
+            form = PatientForm(request.POST, request.FILES, instance=patientObj)
+            if form.is_valid():
+                form.save()
+                return redirect('account')
+    context = {'form': form}
+    return render(request, 'Profile/edit-profile.html', context)
 
 
 def singleDoctor(request, pk):
@@ -57,7 +79,7 @@ def signupDoctor(request):
             doctor.is_doctor = True
             doctor.save()
             messages.success(request, 'Account was created!')
-            return redirect('doctors')
+            return redirect('edit-profile')
             # return redirect(reverse('doctor-register', kwargs={"user": user}))
             # return redirect('doctor-register', user=user)
         else:
@@ -81,7 +103,7 @@ def signupPatient(request):
                 patient.is_patient = True
                 patient.save()
                 messages.success(request, 'Account was created!')
-                return redirect('doctors')
+                return redirect('edit-profile')
             else:
                 messages.error(request, 'Enter valid phone number.')
         else:

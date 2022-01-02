@@ -22,7 +22,7 @@
         <li><a href="{% url 'doctors' %}">Doctors</a></li>
         <li><a href="{% url 'blogs' %}">Blogs</a></li>
           {% if request.user.is_authenticated %}
-            <li><a href="{% url 'account' %}" >Account</a></li>
+            <li><a href="{% url 'account' %}" class="active">Account</a></li>
             <li><a href="{% url 'logout' %}">Logout</a></li>
           {% else %}
             <li><a href="{% url 'patient-signup' %}">Signup</a></li>
@@ -37,6 +37,7 @@
       <section class="section-1 center" id="section-1">
         <img src="{{doctor.doc_image.url}}" alt="" class="person-img" />
         <h3 class="person-name">{{doctor.name}}</h3>
+        <p class="ed-pro"><a class="a-ed-pro" href="{% url 'edit-profile' %}">Edit Profile</a></p>
         <a href="" class="section-1-btn">Get An Appointment</a>
       </section>
       <!-- End of Section 1 -->

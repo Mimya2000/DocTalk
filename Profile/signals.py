@@ -31,9 +31,30 @@ def deleteDoctor(sender, instance, **kwargs):
     user.delete()
 
 
+@receiver(post_save, sender=Doctor)
+def updateDoctor(sender, instance, created, **kwargs):
+    profile = instance
+    user = profile.user
+    if not created:
+        user.name = profile.name
+        user.email = profile.email
+        user.phone = profile.phone
+        user.reg_num = profile.reg_num
+        user.save()
+
+
+@receiver(post_save, sender=Patient)
+def updatePatient(sender, instance, created, **kwargs):
+    profile = instance
+    user = profile.user
+    if not created:
+        user.name = profile.name
+        user.email = profile.email
+        user.phone = profile.phone
+        user.save()
+
+
 @receiver(post_delete, sender=Patient)
 def deletePatient(sender, instance, **kwargs):
     user = instance
     user.delete()
-
-

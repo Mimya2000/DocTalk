@@ -1,7 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.forms import ModelForm
 from django import forms
-from .models import CustomUser, Doctor
+from .models import CustomUser, Doctor, Patient
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -52,6 +52,30 @@ class DoctorCreationForm(UserCreationForm):
             self.fields['password2'].widget.attrs.update(
                 {'class': 'form-control', 'id': 'password2', 'placeholder': 'Confirm your Password',
                  'style': 'color: #2F4F4F;'})
+
+
+class DoctorForm(ModelForm):
+    class Meta:
+        model = Doctor
+        fields = ['name', 'email', 'phone', 'c_address', 'reg_num', 'bkash_no', 'specialization',
+                  'fees_new', 'fees_old', 'fees_report', 'doc_image']
+
+    def __init__(self, *args, **kwargs):
+        super(DoctorForm, self).__init__(*args, **kwargs)
+        for name, field in self.fields.items():
+            field.widget.attrs.update({'class': 'form-control'})
+
+
+class PatientForm(ModelForm):
+    class Meta:
+        model = Patient
+        fields = ['name', 'email', 'phone', 'gender', 'dob', 'feet', 'inch', 'weight', 'asthma',
+                  'is_diabetic', 'bs_before', 'bs_after', 'allergic', 'systole', 'diastole', 'patient_image']
+
+    def __init__(self, *args, **kwargs):
+        super(PatientForm, self).__init__(*args, **kwargs)
+        for name, field in self.fields.items():
+            field.widget.attrs.update({'class': 'form-control'})
 
 
 class PatientCreationForm(UserCreationForm):
