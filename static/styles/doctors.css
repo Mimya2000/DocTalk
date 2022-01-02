@@ -171,6 +171,7 @@ Menu
   padding: 5rem 0;
 }
 .title {
+  margin: 20px;
   text-align: center;
   margin-bottom: 2rem;
 }
@@ -214,7 +215,7 @@ Menu
 .menu-item {
   display: grid;
   gap: 1rem 2rem;
-  max-width: 25rem;
+  max-width: 30rem;
 }
 .photo {
   object-fit: cover;

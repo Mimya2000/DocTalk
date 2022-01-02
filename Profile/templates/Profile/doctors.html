@@ -12,9 +12,24 @@
     />
     <!-- styles -->
     <link rel="stylesheet" href="{% static 'styles/doctors.css' %}" />
+    <link rel="stylesheet" href="{% static 'styles/navbar.css' %}" />
   </head>
+  <nav>
+      <ul>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'doctors' %}" class="active">Doctors</a></li>
+        <li><a href="{% url 'blogs' %}">Blogs</a></li>
+          {% if request.user.is_authenticated %}
+            <li><a href="{% url 'account' %}">Account</a></li>
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+          {% else %}
+            <li><a href="{% url 'patient-signup' %}">Signup</a></li>
+            <li><a href="{% url 'login' %}">Login</a></li>
+          {% endif %}
+        <li><a></a></li>
+      </ul>
+    </nav>
   <body>
-  {% include 'navbar.html' %}
     <section class="menu">
       <!-- title -->
       <div class="title">

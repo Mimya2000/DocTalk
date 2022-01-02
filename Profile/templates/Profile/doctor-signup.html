@@ -6,19 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="{% static 'styles/doctor-signup.css' %}" />
+    <link rel="stylesheet" href="{% static 'styles/navbar.css' %}" />
     <title>Doctor Signup</title>
   </head>
+  <nav>
+      <ul>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'doctors' %}">Doctors</a></li>
+        <li><a href="{% url 'blogs' %}">Blogs</a></li>
+          {% if request.user.is_authenticated %}
+            <li><a href="{% url 'account' %}">Account</a></li>
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+          {% else %}
+            <li><a href="{% url 'patient-signup' %}" class="active">Signup</a></li>
+            <li><a href="{% url 'login' %}">Login</a></li>
+          {% endif %}
+        <li><a></a></li>
+      </ul>
+    </nav>
   <body>
-  {% include 'navbar.html' %}
-  {% if messages %}
-        {% for message in messages %}
-            <div class="alert alert--{{message.tags}}">
-                <p class="alert__message"> {{ message }} </p>
-                <button class="alert__close">x</button>
-            </div>
-        {% endfor %}
-    {% endif %}
-    <div class="article">
+    <div class="article" style="padding: 100px 400px;">
        <div class="gap"></div>
       <div class="container">
         <form method="POST" action="{% url 'doctor-signup' %}" id="form" class="form">
@@ -34,7 +41,7 @@
           </div>
           {% endfor %}
           <button type="submit">Register</button>
-          <p>Already have an account? <a href="{% url 'login' %}" style="color: #008080; font-size: 18px; font-weight: bold; text-decoration: none;">Login</a></p>
+          <p style="padding-top:10px;" >Already have an account? <a href="{% url 'login' %}" style="color: #008080; font-size: 18px; font-weight: bold; text-decoration: none;">Login</a></p>
         </form>
       </div>
     </div>

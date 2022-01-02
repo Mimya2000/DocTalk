@@ -5,7 +5,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Doctor Profile</title>
-    <link rel="stylesheet" href="{% static 'styles/doctor-profile.css' %}" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
@@ -14,16 +13,32 @@
       href="https://fonts.googleapis.com/css2?family=Jost:wght@100;200;300;400;500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="{% static 'styles/doctor-profile.css' %}" />
+    <link rel="stylesheet" href="{% static 'styles/navbar.css' %}" />
   </head>
+  <nav>
+      <ul>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'doctors' %}">Doctors</a></li>
+        <li><a href="{% url 'blogs' %}">Blogs</a></li>
+          {% if request.user.is_authenticated %}
+            <li><a href="{% url 'account' %}" class="active">Account</a></li>
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+          {% else %}
+            <li><a href="{% url 'patient-signup' %}">Signup</a></li>
+            <li><a href="{% url 'login' %}">Login</a></li>
+          {% endif %}
+        <li><a></a></li>
+      </ul>
+    </nav>
   <body>
-  {% include 'navbar.html' %}
     <div class="container">
       <!-- Section 1 -->
       <section class="section-1 center" id="section-1">
         <img src="{{doctor.doc_image.url}}" alt="" class="person-img" />
         <h3 class="person-name">{{doctor.name}}</h3>
         <p class="ed-pro"><a class="a-ed-pro" href="">Edit Profile</a></p>
-        <a href="#section-4" class="section-1-btn">Get An Appointment</a>
+        <a href="" class="section-1-btn">Get An Appointment</a>
       </section>
       <!-- End of Section 1 -->
 

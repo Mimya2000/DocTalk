@@ -49,6 +49,15 @@
                         <li class="nav__item">
                             <a href="{% anchor 'home' 'contact' %}" class="nav__link" id="contactid">Contact</a>
                         </li>
+                        {% if request.user.is_authenticated %}
+                        <li class="nav__item">
+                          <a href="{% url 'account' %}" class="nav__link" id="accountid">Account</a>
+                        </li>
+
+                        <li class="nav__item">
+                          <a href="{% url 'logout' %}" class="nav__link" id="logoutid">Logout</a>
+                        </li>
+                        {% else %}
                         <li class="nav__item">
                           <a href="{% url 'patient-signup' %}" class="nav__link" id="signupid">SignUp</a>
                         </li>
@@ -56,6 +65,7 @@
                         <li class="nav__item">
                           <a href="{% url 'login' %}" class="nav__link" id="loginid">Login</a>
                         </li>
+                        {% endif %}
                     </ul>
 
                     <!-- <div class="nav__close" id="nav-close">
