@@ -36,6 +36,31 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
 
 class Doctor(models.Model):
+    SPECIALIZATION = (
+        ('Internal medicine', 'Internal medicine'),
+        ('Pediatricians', 'Pediatricians'),
+        ('Geriatric medicine', 'Geriatric medicine'),
+        ('Allergists', 'Allergists'),
+        ('Dermatologists', 'Dermatologists'),
+        ('Anesthesiologists', 'Anesthesiologists'),
+        ('Cardiac surgeons', 'Cardiac surgeons'),
+        ('Ophthalmologists', 'Ophthalmologists'),
+        ('Orthopedic surgeons', 'Orthopedic surgeons'),
+        ('Obstetrician/gynecologists', 'Obstetrician/gynecologists'),
+        ('General surgeons', 'General surgeons'),
+        ('Cardiologists', 'Cardiologists'),
+        ('Endocrinologists', 'Endocrinologists'),
+        ('Rheumatologists', 'Rheumatologists'),
+        ('Radiologists', 'Radiologists'),
+        ('Gastroenterologists', 'Gastroenterologists'),
+        ('Oncologists', 'Oncologists'),
+        ('Nephrologists', 'Nephrologists'),
+        ('Urologists', 'Urologists'),
+        ('Pulmonologists', 'Pulmonologists'),
+        ('Psychiatrists', 'Psychiatrists'),
+        ('Otolaryngologists', 'Otolaryngologists'),
+        ('Neurologists', 'Neurologists'),
+    )
     user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE)
     email = models.EmailField(blank=True, null=True)
     name = models.CharField(max_length=200)
@@ -43,7 +68,7 @@ class Doctor(models.Model):
     c_address = models.TextField(max_length=1024, blank=True, null=True)
     reg_num = models.CharField(max_length=10, blank=True, null=True)
     bkash_no = models.CharField(max_length=11, blank=True, null=True)
-    specializations = models.ManyToManyField('Specialization')
+    specialization = models.CharField(max_length=50, choices=SPECIALIZATION, default='Internal medicine')
     fees_new = models.IntegerField(blank=True, null=True)
     fees_old = models.IntegerField(blank=True, null=True)
     fees_report = models.IntegerField(blank=True, null=True)
@@ -64,15 +89,9 @@ class Degree(models.Model):
         return self.doc_id
 
 
-class Specialization(models.Model):
-    name = models.CharField(max_length=200)
-    id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
-
-    def __str__(self):
-        return self.name
-
 
 ########################################## PATIENT ######################################
+
 
 
 class Patient(models.Model):

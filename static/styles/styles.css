@@ -190,6 +190,15 @@ body.dark-theme{
   align-items: center;
 }
 
+.nav_image{
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-top: -6px;
+    float: left;
+}
+
 .nav__logo,
 .nav__toggle,
 .nav__close{
@@ -207,7 +216,7 @@ body.dark-theme{
 }
 
 .nav__logo-icon{
-  font-size: 1.15rem;
+  font-size: 0rem;
   color: var(--first-color);
 }
 

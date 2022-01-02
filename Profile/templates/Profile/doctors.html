@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="{% static 'styles/doctors.css' %}" />
   </head>
   <body>
+  {% include 'navbar.html' %}
     <section class="menu">
       <!-- title -->
       <div class="title">
@@ -27,17 +28,21 @@
       <div class="section-center">
         <!-- single item -->
         {% for doctor in doctors %}
-        <article class="menu-item">
-          <img src="{{ doctor.doc_image.url }}" alt="" class="photo" />
-          <div class="item-info">
-            <header>
-              <h4>{{doctor.name}}</h4>
-            </header>
-            <p class="item-text">
-              Descriptions.
-            </p>
-          </div>
-        </article>
+        <a href="{% url 'doctor' doctor.id %}">
+          <article class="menu-item">
+            <img src="{{ doctor.doc_image.url }}" alt="" class="photo" />
+            <div class="item-info">
+              <header>
+                <h4>{{doctor.name}}</h4>
+              </header>
+              {% for deg in doctor.degree_set.all %}
+                <p class="item-text">
+                  {{deg.name}}, {{deg.institute}}
+                </p>
+              {% endfor %}
+            </div>
+          </article>
+        </a>
         {% endfor %}
         <!-- end of single item -->
       </div>

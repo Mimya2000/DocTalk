@@ -5,6 +5,8 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from .models import Patient, Doctor, CustomUser
 from .forms import CustomUserCreationForm, DoctorCreationForm, PatientCreationForm
+from datetime import date
+from django.contrib.auth.decorators import login_required
 
 
 def doctors(request):
@@ -13,16 +15,37 @@ def doctors(request):
     return render(request, 'Profile/doctors.html', context)
 
 
+@login_required(login_url='login')
+def account(request):
+    if request.user.is_doctor:
+        doctorObj = request.user.doctor
+        context = {'doctor': doctorObj}
+        return render(request, 'Profile/doctor-profile.html', context)
+    else:
+        patientObj = request.user.patient
+        today = date.today()
+        born = patientObj.dob
+        if not born:
+            age = 'unspecified'
+        else:
+            age = today.year - born.year - ((today.month, today.day) < (born.month, born.day))
+        context = {'patient': patientObj, 'age': age}
+        return render(request, 'Profile/patient-profile.html', context)
+
+
 def singleDoctor(request, pk):
-    # doctorObj = Doctor.objects.get(id=pk)
-    # context = {'doctor': doctorObj}
-    return render(request, 'Profile/doctor-profile.html')
+    doctorObj = Doctor.objects.get(id=pk)
+    context = {'doctor': doctorObj}
+    return render(request, 'Profile/doctor-profile.html', context)
 
 
 def singlePatient(request, pk):
-    # patientObj = Patient.objects.get(id=pk)
-    # context = {'patient': patientObj}
-    return render(request, 'Profile/patient-profile.html')
+    patientObj = Patient.objects.get(id=pk)
+    today = date.today()
+    born = patientObj.dob
+    age = today.year - born.year - ((today.month, today.day) < (born.month, born.day))
+    context = {'patient': patientObj, 'age': age}
+    return render(request, 'Profile/patient-profile.html', context)
 
 
 def signupDoctor(request):

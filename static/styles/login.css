@@ -104,3 +104,16 @@ h2 {
   margin-top: 20px;
   width: 100%;
 }
+
+.pass{
+  text-align: center;
+  background-color: #aecdd8;
+  padding: 3px;
+
+
+}
+
+.a-pass{
+  text-decoration: none;
+  color: #177aa1;
+}

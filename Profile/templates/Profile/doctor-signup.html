@@ -9,6 +9,7 @@
     <title>Doctor Signup</title>
   </head>
   <body>
+  {% include 'navbar.html' %}
   {% if messages %}
         {% for message in messages %}
             <div class="alert alert--{{message.tags}}">

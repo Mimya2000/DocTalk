@@ -9,6 +9,7 @@
     <title>Login</title>
   </head>
   <body>
+  {% include 'navbar.html' %}
     <div class="article">
 
     <div class="gap"></div>
@@ -32,6 +33,14 @@
 
         <button type="submit">Login</button>
         <p>Don't have an account? <a href="{% url 'patient-signup' %}" style="color: #008080; font-size: 18px; font-weight: bold; text-decoration: none;">Sign Up</a></p>
+        <p>Forgot your password? <a href="{% url 'patient-signup' %}" style="color: #008080; font-size: 18px; font-weight: bold; text-decoration: none;">Reset Password</a></p>
+<!--         <div class="form-control">-->
+<!--            <label for="password"></label>-->
+
+<!--            <p class="pass">-->
+<!--              <a class="a-pass" href=""> Forgotten Password</a>-->
+<!--            </p>-->
+<!--          </div>-->
       </form>
     </div>
 </div>
