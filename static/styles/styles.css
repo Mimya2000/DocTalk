@@ -14,6 +14,9 @@
   --text-color-light: hsl(var(--hue), 4%, 55%);
   --body-color: hsl(var(--hue), 0%, 100%);
   --container-color: #FFF;
+  --success-color: #2ecc71;
+  --error-color: #e74c3c;
+  --info-color: #87CEFA;
 
   /*========== Font and typography ==========*/
   --body-font: 'Poppins', sans-serif;

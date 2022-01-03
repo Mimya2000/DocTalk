@@ -4,6 +4,7 @@
 :root {
   --success-color: #2ecc71;
   --error-color: #e74c3c;
+  --info-color: #87CEFA;
   --color-main: #5aa5b9;
   --color-main-light: #e6faff;
 }
@@ -57,6 +58,7 @@ h2 {
 }
 
 .form-control {
+  display: block;
   margin-bottom: 10px;
   padding-bottom: 20px;
   position: relative;
@@ -66,6 +68,13 @@ h2 {
   color: #777;
   display: block;
   margin-bottom: 5px;
+}
+
+input.larger {
+  display: flex;
+  align-items: center;
+  height: 15px;
+  margin: 10px;
 }
 
 .form-control input {
