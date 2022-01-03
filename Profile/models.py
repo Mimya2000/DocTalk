@@ -107,7 +107,7 @@ class Patient(models.Model):
     feet = models.CharField(max_length=5, null=True, blank=True)
     inch = models.CharField(max_length=5, null=True, blank=True)
     weight = models.CharField(max_length=5, null=True, blank=True)
-    dob = models.DateTimeField(blank=True, null=True)
+    dob = models.DateField(blank=True, null=True)
     asthma = models.BooleanField(blank=True, null=True)
     is_diabetic = models.BooleanField(default=False, blank=True, null=True)
     bs_before = models.CharField(max_length=5, null=True, blank=True)

@@ -79,6 +79,7 @@ def signupDoctor(request):
             doctor.is_doctor = True
             doctor.save()
             messages.success(request, 'Account was created!')
+            login(request, doctor)
             return redirect('edit-profile')
             # return redirect(reverse('doctor-register', kwargs={"user": user}))
             # return redirect('doctor-register', user=user)
@@ -103,6 +104,7 @@ def signupPatient(request):
                 patient.is_patient = True
                 patient.save()
                 messages.success(request, 'Account was created!')
+                login(request, patient)
                 return redirect('edit-profile')
             else:
                 messages.error(request, 'Enter valid phone number.')
@@ -126,7 +128,7 @@ def userLogin(request):
             messages.error(request, "Email or Password is incorrect!")
         else:
             login(request, user)
-            return redirect('doctors')
+            return redirect('account')
     return render(request, 'Profile/login.html')
 
 

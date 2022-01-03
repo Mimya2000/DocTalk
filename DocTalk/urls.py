@@ -23,7 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('Home.urls')),
     path('profiles/', include('Profile.urls')),
-    # path('blogs/', include('Blog.urls')),
+    path('blogs/', include('Blog.urls')),
 ]
 
 if settings.DEBUG:
@@ -31,7 +31,6 @@ if settings.DEBUG:
         urls.url(r'^media/(?P<path>.*)$',
                  serve, {'document_root': settings.MEDIA_ROOT, }),
     ]
-
 
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

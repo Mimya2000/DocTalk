@@ -4,6 +4,8 @@
 :root {
   --success-color: #2ecc71;
   --error-color: #e74c3c;
+  --color-main: #5aa5b9;
+  --color-main-light: #e6faff;
 }
 
 * {
@@ -111,4 +113,20 @@ h2 {
   padding: 10px;
   margin-top: 20px;
   width: 20%;
+}
+
+
+.backButton {
+  background: var(--color-main-light);
+  color: var(--color-main);
+  width: 4rem;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.backButton i {
+  font-size: 1.8rem;
 }

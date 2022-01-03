@@ -41,7 +41,7 @@ INSTALLED_APPS = [
 
     'Home.apps.HomeConfig',
     'Profile.apps.ProfileConfig',
-    # 'Blog.apps.BlogConfig',
+    'Blog.apps.BlogConfig',
 ]
 
 MIDDLEWARE = [
@@ -122,6 +122,12 @@ USE_L10N = True
 
 USE_TZ = True
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'projectwork.testemail@gmail.com'
+EMAIL_HOST_PASSWORD = 'CSE299327'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
