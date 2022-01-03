@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'Home.apps.HomeConfig',
     'Profile.apps.ProfileConfig',
     'Blog.apps.BlogConfig',
+    'Appointment.apps.AppointmentConfig',
 ]
 
 MIDDLEWARE = [
