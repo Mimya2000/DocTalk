@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="https://cdn.iconmonstr.com/1.3.0/css/iconmonstr-iconic-font.min.css" />
+    <link rel="stylesheet" href="{% static 'styles/forget-pass.css' %}" />
+    <title>Confirm Password</title>
+  </head>
+  <body>
+    <div class="article">
+      <div class="container">
+         <a class="backButton" href="{% url 'login' %}"><i class="im im-angle-left"></i></a>
+        <br>
+        <form id="form" class="form" method="POST">
+            {% csrf_token %}
+          <h2>Enter new password</h2>
+            <p>Please enter your new password twice, so we can verify you typed it in correctly.</p>
+            <br>
+          {% for field in form %}
+          <div class="form-control">
+            <label>{{field.label}}</label>
+            {{field}}
+             {% for error in field.errors %}
+              <p style="color: red; font-size: 12px; line-height: 0em;"> {{error}} </p>
+             {% endfor %}
+          </div>
+          {% endfor %}
+          <input class="btn"  type="submit" value="Reset" />
+        </form>
+      </div>
+    </div>
+<!--    <script src="script.js"></script>-->
+  </body>
+</html>

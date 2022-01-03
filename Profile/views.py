@@ -1,12 +1,21 @@
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import UserCreationForm
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from .models import Patient, Doctor, CustomUser
 from .forms import CustomUserCreationForm, DoctorCreationForm, PatientCreationForm, DoctorForm, PatientForm
 from datetime import date
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordResetForm
+from django.db.models.query_utils import Q
+from django.utils.http import urlsafe_base64_encode
+from django.utils.encoding import force_bytes
+from django.contrib.auth.tokens import default_token_generator
+from django.template.loader import render_to_string
+from django.core.mail import send_mail, BadHeaderError
 
 
 def doctors(request):
@@ -138,3 +147,40 @@ def userLogout(request):
     return redirect('login')
 
 
+def passwordReset(request):
+    if request.method == 'POST':
+        form = PasswordResetForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data['email']
+            associated_users = CustomUser.objects.filter(Q(email=data))
+            if associated_users.exists():
+                for user in associated_users:
+                    subject = "Password Reset Requested"
+                    email_template_name = "Text/password_reset_email.txt"
+                    c = {
+                        "email": user.email,
+                        "name": user.name,
+                        'domain': '127.0.0.1:8000',
+                        'site_name': 'DocTalk',
+                        "uid": urlsafe_base64_encode(force_bytes(user.pk)),
+                        "user": user,
+                        'token': default_token_generator.make_token(user),
+                        'protocol': 'http',
+                    }
+                    email = render_to_string(email_template_name, c)
+                    try:
+                        send_mail(
+                            subject,
+                            email,
+                            settings.EMAIL_HOST_USER,
+                            [user.email],
+                            fail_silently=False,
+                        )
+                    except BadHeaderError:
+                        return HttpResponse('Invalid header found.')
+                    messages.success(request, 'A message with reset password instructions has been sent to your inbox.')
+                    return redirect("password_reset_done")
+            messages.error(request, 'An invalid email has been entered.')
+    form = PasswordResetForm()
+    context = {'form': form}
+    return render(request, 'reset_password.html', context)

@@ -19,11 +19,23 @@ from django.urls import path, include
 from django.views.static import serve
 from django.conf import settings, urls
 
+from django.contrib.auth import views as auth_views
+from Profile import views as v
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('Home.urls')),
     path('profiles/', include('Profile.urls')),
     path('blogs/', include('Blog.urls')),
+
+    path('password_reset/', v.passwordReset, name="password_reset"),
+    path('reset_password_sent/', auth_views.PasswordResetDoneView.as_view(template_name="reset_password_sent.html"),
+         name="password_reset_done"),
+    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name="reset.html"),
+         name="password_reset_confirm"),
+    path('reset_password_complete/',
+         auth_views.PasswordResetCompleteView.as_view(template_name="reset_password_complete.html"),
+         name="password_reset_complete"),
 ]
 
 if settings.DEBUG:
