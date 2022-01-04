@@ -16,13 +16,14 @@
         <li><a href="{% url 'doctors' %}">Doctors</a></li>
         <li><a href="{% url 'blogs' %}">Blogs</a></li>
           {% if request.user.is_authenticated %}
-            <li><a href="{% url 'account' %}">Account</a></li>
+            <li><a href="{% url 'account' %}" >Account</a></li>
+            <li><a href="{% url 'my-appointments' %}" >My Appointments</a></li>
             <li><a href="{% url 'logout' %}">Logout</a></li>
           {% else %}
             <li><a href="{% url 'patient-signup' %}">Signup</a></li>
             <li><a href="{% url 'login' %}" class="active">Login</a></li>
+            <li><a></a></li>
           {% endif %}
-        <li><a></a></li>
       </ul>
     </nav>
   <body>

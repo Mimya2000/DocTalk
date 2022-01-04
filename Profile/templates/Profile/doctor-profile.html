@@ -24,12 +24,13 @@
         <li><a href="{% url 'blogs' %}">Blogs</a></li>
           {% if request.user.is_authenticated %}
             <li><a href="{% url 'account' %}" >Account</a></li>
+            <li><a href="{% url 'my-appointments' %}" >My Appointments</a></li>
             <li><a href="{% url 'logout' %}">Logout</a></li>
           {% else %}
             <li><a href="{% url 'patient-signup' %}">Signup</a></li>
             <li><a href="{% url 'login' %}">Login</a></li>
+            <li><a></a></li>
           {% endif %}
-        <li><a></a></li>
       </ul>
     </nav>
   <body>
@@ -39,7 +40,7 @@
       <section class="section-1 center" id="section-1">
         <img src="{{doctor.doc_image.url}}" alt="" class="person-img" />
         <h3 class="person-name">{{doctor.name}}</h3>
-        <a href="" class="section-1-btn">Get An Appointment</a>
+        <a href="{% url 'appointment' doctor.id %}" class="section-1-btn">Get An Appointment</a>
       </section>
       <!-- End of Section 1 -->
 

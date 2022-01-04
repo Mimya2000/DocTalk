@@ -83,7 +83,7 @@ def editDegree(request):
 
 def singleDoctor(request, pk):
     doctorObj = Doctor.objects.get(id=pk)
-    if request.user.doctor == doctorObj:
+    if request.user == doctorObj.user:
         return redirect('account')
     context = {'doctor': doctorObj}
     return render(request, 'Profile/doctor-profile.html', context)
