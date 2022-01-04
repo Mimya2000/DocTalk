@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="https://cdn.iconmonstr.com/1.3.0/css/iconmonstr-iconic-font.min.css" />
+    <link rel="stylesheet" href="{% static 'styles/edit-profile.css' %}" />
+    <link rel="stylesheet" href="{% static 'styles/alert.css' %}" />
+    <title>Add Degree</title>
+  </head>
+  <body>
+  {% include 'messages.html' %}
+    <div class="article">
+      <div class="container">
+        <a class="backButton" href="{% url 'account' %}"><i class="im im-angle-left"></i></a>
+        <br>
+        <form class="form" method="POST">
+          {% csrf_token %}
+          {% for field in form %}
+          <div class="form-control">
+            <label for="formInput#text">{{field.label}}:</label>
+            {{field}}
+            {% for error in field.errors %}
+              <p style="color: red; font-size: 12px; line-height: 0em;"> {{error}} </p>
+            {% endfor %}
+          </div>
+           {% endfor %}
+          <button type="submit">Save</button>
+        </form>
+      </div>
+    </div>
+  <script src="{% static 'js/alert.js' %}"></script>
+  </body>
+</html>

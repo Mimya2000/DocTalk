@@ -15,6 +15,7 @@
     />
     <link rel="stylesheet" href="{% static 'styles/doctor-profile.css' %}" />
     <link rel="stylesheet" href="{% static 'styles/navbar.css' %}" />
+    <link rel="stylesheet" href="{% static 'styles/alert.css' %}" />
   </head>
   <nav>
       <ul>
@@ -32,13 +33,14 @@
       </ul>
     </nav>
   <body>
+  {% include 'messages.html' %}
     <div class="container">
       <!-- Section 1 -->
       <section class="section-1 center" id="section-1">
         <img src="{{doctor.doc_image.url}}" alt="" class="person-img" />
         <h3 class="person-name">{{doctor.name}}</h3>
         <p class="ed-pro"><a class="a-ed-pro" href="{% url 'edit-profile' %}">Edit Profile</a></p>
-        <a href="" class="section-1-btn">Get An Appointment</a>
+        <p class="ed-pro"><a class="a-ed-pro" href="{% url 'edit-degree' %}">Add Degree</a></p>
       </section>
       <!-- End of Section 1 -->
 
@@ -52,7 +54,6 @@
                 <p class="progress-text">
                   Specialization: {{doctor.specialization}}
                 </p>
-                <div class="progress-percent"></div>
               </div>
             </li>
             <li>
@@ -61,8 +62,8 @@
                 <p class="progress-text">
                   {{deg.name}}, {{deg.institute}}
                 </p>
+                <br>
                 {% endfor %}
-                <div class="progress-percent"></div>
               </div>
             </li>
             <li>
@@ -70,7 +71,6 @@
                 <p class="progress-text">
                   Contact Number: {{doctor.phone}}
                 </p>
-                <div class="progress-percent"></div>
               </div>
             </li>
             <li>
@@ -78,7 +78,6 @@
                 <p class="progress-text">
                   Chamber Address: {{doctor.c_address}}
                 </p>
-                <div class="progress-percent"></div>
               </div>
             </li>
             <li>
@@ -86,7 +85,6 @@
                 <p class="progress-text">
                   Fees: {{doctor.fees_new}} (New), {{doctor.fees_old}} (Old), {{doctor.fees_report}} (Report).
                 </p>
-                <div class="progress-percent"></div>
               </div>
             </li>
           </ul>
@@ -204,5 +202,6 @@
     </div>
 
 <!--    <script src="{% static 'js/doctor-profile.js' %}"></script>-->
+  <script src="{% static 'js/alert.js' %}"></script>
   </body>
 </html>

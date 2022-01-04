@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="{% static 'styles/patient-signup.css' %}" />
     <link rel="stylesheet" href="{% static 'styles/navbar.css' %}" />
+    <link rel="stylesheet" href="{% static 'styles/alert.css' %}" />
     <title>Patient Signup</title>
   </head>
   <nav>
@@ -25,6 +26,7 @@
       </ul>
     </nav>
   <body>
+  {% include 'messages.html' %}
     <div class="article" style="padding: 100px 400px;">
        <div class="gap"></div>
     <div class="container">
@@ -50,5 +52,6 @@
     </div>
 
 <!--    <script src="{% static 'js/alert_patient.js' %}"></script>-->
+  <script src="{% static 'js/alert.js' %}"></script>
   </body>
 </html>

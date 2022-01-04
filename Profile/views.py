@@ -6,7 +6,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from .models import Patient, Doctor, CustomUser
-from .forms import CustomUserCreationForm, DoctorCreationForm, PatientCreationForm, DoctorForm, PatientForm
+from .forms import CustomUserCreationForm, DoctorCreationForm, PatientCreationForm, DoctorForm, PatientForm, DegreeForm
 from datetime import date
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordResetForm
@@ -16,11 +16,12 @@ from django.utils.encoding import force_bytes
 from django.contrib.auth.tokens import default_token_generator
 from django.template.loader import render_to_string
 from django.core.mail import send_mail, BadHeaderError
+from .utils import searchDoctors
 
 
 def doctors(request):
-    doctorObj = Doctor.objects.all()
-    context = {'doctors': doctorObj}
+    doctorObj, search_query = searchDoctors(request)
+    context = {'doctors': doctorObj, 'search_query': search_query}
     return render(request, 'Profile/doctors.html', context)
 
 
@@ -64,8 +65,26 @@ def editAccount(request):
     return render(request, 'Profile/edit-profile.html', context)
 
 
+@login_required(login_url='login')
+def editDegree(request):
+    doctor = request.user.doctor
+    form = DegreeForm()
+    if request.method == 'POST':
+        form = DegreeForm(request.POST)
+        if form.is_valid():
+            degree = form.save(commit=False)
+            degree.doc_id = doctor
+            degree.save()
+            messages.success(request, 'Degree was added successfully!')
+            return redirect('account')
+    context = {'form': form}
+    return render(request, 'Profile/edit-degree.html', context)
+
+
 def singleDoctor(request, pk):
     doctorObj = Doctor.objects.get(id=pk)
+    if request.user == doctorObj.user:
+        return redirect('account')
     context = {'doctor': doctorObj}
     return render(request, 'Profile/doctor-profile.html', context)
 

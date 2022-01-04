@@ -3,9 +3,12 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Our Doctors</title>
     <!-- font-awesome -->
+    <link rel="shortcut icon" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
@@ -13,6 +16,8 @@
     <!-- styles -->
     <link rel="stylesheet" href="{% static 'styles/doctors.css' %}" />
     <link rel="stylesheet" href="{% static 'styles/navbar.css' %}" />
+    <link rel="stylesheet" href="{% static 'styles/alert.css' %}" />
+    <script href='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
   </head>
   <nav>
       <ul>
@@ -30,12 +35,24 @@
       </ul>
     </nav>
   <body>
+  {% include 'messages.html' %}
     <section class="menu">
       <!-- title -->
       <div class="title">
         <h2>Our Doctors</h2>
         <div class="underline"></div>
       </div>
+      <div class="wrapper">
+        <form class="form" action="{% url 'doctors' %}" method="get">
+        <div class="search_wrap search_wrap_1">
+          <div class="search_box">
+            <input type="text" class="input" placeholder="search..." name="search_query" value="{{ search_query }}" />
+            <button class="btn" type="submit"><i class="fas fa-search"></i></button>
+          </div>
+        </div>
+        </form>
+      </div>
+    </div>
       <!-- filter buttons -->
       <div class="btn-container">
       </div>
@@ -64,5 +81,6 @@
     </section>
     <!-- javascript -->
 <!--    <script src="{% static 'js/doctors.js' %}"></script>-->
+  <script src="{% static 'js/alert.js' %}"></script>
   </body>
 </html>
