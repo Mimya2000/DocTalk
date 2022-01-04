@@ -68,6 +68,9 @@
               <header>
                 <h4>{{doctor.name}}</h4>
               </header>
+              <p class="item-text">
+                {{doctor.specialization}}
+                </p>
               {% for deg in doctor.degree_set.all %}
                 <p class="item-text">
                   {{deg.name}}, {{deg.institute}}

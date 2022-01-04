@@ -76,7 +76,7 @@ class Doctor(models.Model):
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
 
     def __str__(self):
-        return self.email
+        return str(self.email)
 
 
 class Degree(models.Model):
@@ -86,7 +86,7 @@ class Degree(models.Model):
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
 
     def __str__(self):
-        return self.doc_id
+        return str(self.doc_id)
 
 
 

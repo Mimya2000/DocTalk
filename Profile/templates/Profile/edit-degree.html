@@ -17,6 +17,7 @@
       <div class="container">
         <a class="backButton" href="{% url 'account' %}"><i class="im im-angle-left"></i></a>
         <br>
+        <h2 style="color: #5aa5b9;">Add A Degree</h2>
         <form class="form" method="POST">
           {% csrf_token %}
           {% for field in form %}

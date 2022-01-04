@@ -302,7 +302,7 @@ Menu
   .menu-item {
     grid-template-columns: 225px 1fr;
     gap: 0 1.25rem;
-    max-width: 40rem;
+    width: 40rem;
   }
   .photo {
     height: 220px;

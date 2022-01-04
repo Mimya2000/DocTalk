@@ -6,8 +6,10 @@ from django.shortcuts import render, redirect
 from Profile.models import Doctor, Patient
 from .forms import AppointmentForm
 from .models import Appointment
+from django.contrib.auth.decorators import login_required
 
 
+@login_required(login_url='login')
 def appointment(request, pk):
     form = AppointmentForm()
     doctor = Doctor.objects.get(id=pk)
@@ -46,6 +48,7 @@ def appointment(request, pk):
     return render(request, 'Appointment/appointment.html', context)
 
 
+@login_required(login_url='login')
 def appointments(request):
     if request.user.is_doctor:
         doctor = request.user.doctor
@@ -54,8 +57,8 @@ def appointments(request):
         patient = request.user.patient
         appoint = Appointment.objects.all().filter(patient_id=patient)
     now = datetime.now().date()
-    today = Appointment.objects.all().filter(date__year=now.year, date__month=now.month, date__day=now.day)
-    future = Appointment.objects.all().filter(date__gt=now)
-    past = Appointment.objects.all().filter(date__lt=now)
+    today = appoint.filter(date__year=now.year, date__month=now.month, date__day=now.day)
+    future = appoint.filter(date__gt=now)
+    past = appoint.filter(date__lt=now)
     context = {'today': today, 'future': future, 'past': past}
     return render(request, 'Appointment/my-appointments.html', context)
