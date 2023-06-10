@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Appointments</title>
+     <link rel="stylesheet" href="{% static 'styles/my-appointments.css' %}" />
+     <link rel="stylesheet" href="{% static 'styles/navbar.css' %}" />
+  </head>
+  <nav>
+      <ul>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'doctors' %}">Doctors</a></li>
+        <li><a href="{% url 'blogs' %}">Blogs</a></li>
+          {% if request.user.is_authenticated %}
+            <li><a href="{% url 'account' %}" >Account</a></li>
+            <li><a href="{% url 'my-appointments' %}" class="active">My Appointments</a></li>
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+          {% else %}
+            <li><a href="{% url 'patient-signup' %}">Signup</a></li>
+            <li><a href="{% url 'login' %}">Login</a></li>
+            <li><a></a></li>
+          {% endif %}
+      </ul>
+    </nav>
+  <body>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+    <table class="content-table">
+      {% if request.user.is_doctor %}
+        <h2>Today's Appointments</h2>
+        <thead>
+          <tr>
+            <th>Patient's Name</th>
+            <th>Phone</th>
+            <th>Date</th>
+            <th>Payment Status</th>
+            <th>Appointment Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for appoint in today %}
+            <tr>
+              <td><a style="color: #008080; font-size: 18px;" href="{% url 'patient' appoint.patient_id.id %}">{{appoint.patient_id.name}}</a></td>
+              <td>{{appoint.patient_id.phone}}</td>
+              <td>{{appoint.date}}</td>
+              <td><span class="yes">Yes</span></td>
+              <td><span class="no">No</span></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      {% else %}
+      <h2>Today's Appointments</h2>
+        <thead>
+          <tr>
+            <th>Doctor's Name</th>
+            <th>Phone</th>
+            <th>Date</th>
+            <th>Fees</th>
+            <th>Payment Status</th>
+            <th>Appointment Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for appoint in today %}
+            <tr>
+              <td><a style="color: #008080; font-size: 18px;" href="{% url 'doctor' appoint.doc_id.id %}">{{appoint.doc_id.name}}</a></td>
+              <td>{{appoint.doc_id.phone}}</td>
+              <td>{{appoint.date}}</td>
+              <td>{{appoint.doc_id.fees_new}}</td>
+              <td><span class="yes">Yes</span></td>
+              <td><span class="no">No</span></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      {% endif %}
+    </table>
+
+  <br>
+  <br>
+  <br>
+    <table class="content-table">
+      {% if request.user.is_doctor %}
+        <h2>Future Appointments</h2>
+        <thead>
+          <tr>
+            <th>Patient's Name</th>
+            <th>Phone</th>
+            <th>Date</th>
+            <th>Payment Status</th>
+            <th>Appointment Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for appoint in future %}
+            <tr>
+              <td><a style="color: #008080; font-size: 18px;" href="{% url 'patient' appoint.patient_id.id %}">{{appoint.patient_id.name}}</a></td>
+              <td>{{appoint.patient_id.phone}}</td>
+              <td>{{appoint.date}}</td>
+              <td><span class="yes">Yes</span></td>
+              <td><span class="no">No</span></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      {% else %}
+      <h2>Future Appointments</h2>
+        <thead>
+          <tr>
+            <th>Doctor's Name</th>
+            <th>Phone</th>
+            <th>Date</th>
+            <th>Fees</th>
+            <th>Payment Status</th>
+            <th>Appointment Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for appoint in future %}
+            <tr>
+              <td><a style="color: #008080; font-size: 18px;" href="{% url 'doctor' appoint.doc_id.id %}">{{appoint.doc_id.name}}</a></td>
+              <td>{{appoint.doc_id.phone}}</td>
+              <td>{{appoint.date}}</td>
+              <td>{{appoint.doc_id.fees_new}}</td>
+              <td><span class="yes">Yes</span></td>
+              <td><span class="no">No</span></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      {% endif %}
+    </table>
+
+  <br>
+  <br>
+  <br>
+    <table class="content-table">
+      {% if request.user.is_doctor %}
+        <h2>Past Appointments</h2>
+        <thead>
+          <tr>
+            <th>Patient's Name</th>
+            <th>Phone</th>
+            <th>Date</th>
+            <th>Payment Status</th>
+            <th>Appointment Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for appoint in past %}
+            <tr>
+              <td><a style="color: #008080; font-size: 18px;" href="{% url 'patient' appoint.patient_id.id %}">{{appoint.patient_id.name}}</a></td>
+              <td>{{appoint.patient_id.phone}}</td>
+              <td>{{appoint.date}}</td>
+              <td><span class="yes">Yes</span></td>
+              <td><span class="yes">Yes</span></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      {% else %}
+      <h2>Past Appointments</h2>
+        <thead>
+          <tr>
+            <th>Doctor's Name</th>
+            <th>Phone</th>
+            <th>Date</th>
+            <th>Fees</th>
+            <th>Payment Status</th>
+            <th>Appointment Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for appoint in past %}
+            <tr>
+              <td><a style="color: #008080; font-size: 18px;" href="{% url 'doctor' appoint.doc_id.id %}">{{appoint.doc_id.name}}</a></td>
+              <td>{{appoint.doc_id.phone}}</td>
+              <td>{{appoint.date}}</td>
+              <td>{{appoint.doc_id.fees_new}}</td>
+              <td><span class="yes">Yes</span></td>
+              <td><span class="yes">Yes</span></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      {% endif %}
+    </table>
+  </body>
+</html>

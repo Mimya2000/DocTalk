@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="{% static 'styles/login.css' %}" />
+    <link rel="stylesheet" href="{% static 'styles/navbar.css' %}" />
+    <link rel="stylesheet" href="{% static 'styles/alert.css' %}" />
+    <title>Login</title>
+  </head>
+  <nav>
+      <ul>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'doctors' %}">Doctors</a></li>
+        <li><a href="{% url 'blogs' %}">Blogs</a></li>
+          {% if request.user.is_authenticated %}
+            <li><a href="{% url 'account' %}" >Account</a></li>
+            <li><a href="{% url 'my-appointments' %}" >My Appointments</a></li>
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+          {% else %}
+            <li><a href="{% url 'patient-signup' %}">Signup</a></li>
+            <li><a href="{% url 'login' %}" class="active">Login</a></li>
+            <li><a></a></li>
+          {% endif %}
+      </ul>
+    </nav>
+  <body>
+  {% include 'messages.html' %}
+    <div class="article" style="padding: 200px 500px;">
+
+    <div class="gap"></div>
+    <div class="container">
+      
+      <form id="form" class="form" action="{% url 'login' %}" method="POST">
+        {% csrf_token %}
+        <h2>Login</h2>
+        <div class="form-control">
+          <label for="email">Email</label>
+          <input type="text" name="email" id="email" placeholder="Enter email" />
+<!--          <small>Error message</small>-->
+        </div>
+
+
+        <div class="form-control">
+          <label for="password">Password</label>
+          <input type="password" name="pass" id="password" placeholder="Enter password" />
+<!--          <small>Error message</small>-->
+        </div>
+        {% for error in field.errors %}
+              <p style="color: red; font-size: 12px; line-height: 0em;"> {{error}} </p>
+        {% endfor %}
+
+        <button type="submit">Login</button>
+        <p style="padding-top:10px;" >Don't have an account? <a href="{% url 'patient-signup' %}" style="color: #008080; font-size: 18px; font-weight: bold; text-decoration: none;">Sign Up</a></p>
+        <p style="padding-top:10px;" >Forgot your password? <a href="{% url 'password_reset' %}" style="color: #008080; font-size: 18px; font-weight: bold; text-decoration: none;">Reset Password</a></p>
+<!--         <div class="form-control">-->
+<!--            <label for="password"></label>-->
+
+<!--            <p class="pass">-->
+<!--              <a class="a-pass" href=""> Forgotten Password</a>-->
+<!--            </p>-->
+<!--          </div>-->
+      </form>
+    </div>
+</div>
+<!--    <script src="script.js"></script>-->
+  <script src="{% static 'js/alert.js' %}"></script>
+  </body>
+</html>

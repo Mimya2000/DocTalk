@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Our Doctors</title>
+    <!-- font-awesome -->
+    <link rel="shortcut icon" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+    />
+    <!-- styles -->
+    <link rel="stylesheet" href="{% static 'styles/doctors.css' %}" />
+    <link rel="stylesheet" href="{% static 'styles/navbar.css' %}" />
+    <link rel="stylesheet" href="{% static 'styles/alert.css' %}" />
+    <script href='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+  </head>
+  <nav>
+      <ul>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'doctors' %}" class="active">Doctors</a></li>
+        <li><a href="{% url 'blogs' %}">Blogs</a></li>
+          {% if request.user.is_authenticated %}
+            <li><a href="{% url 'account' %}" >Account</a></li>
+            <li><a href="{% url 'my-appointments' %}" >My Appointments</a></li>
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+          {% else %}
+            <li><a href="{% url 'patient-signup' %}">Signup</a></li>
+            <li><a href="{% url 'login' %}">Login</a></li>
+            <li><a></a></li>
+          {% endif %}
+      </ul>
+    </nav>
+  <body>
+  {% include 'messages.html' %}
+    <section class="menu">
+      <!-- title -->
+      <div class="title">
+        <h2>Our Doctors</h2>
+        <div class="underline"></div>
+      </div>
+      <div class="wrapper">
+        <form class="form" action="{% url 'doctors' %}" method="get">
+        <div class="search_wrap search_wrap_1">
+          <div class="search_box">
+            <input type="text" class="input" placeholder="search..." name="search_query" value="{{ search_query }}" />
+            <button class="btn" type="submit"><i class="fas fa-search"></i></button>
+          </div>
+        </div>
+        </form>
+      </div>
+    </div>
+      <!-- filter buttons -->
+      <div class="btn-container">
+      </div>
+      <!-- menu items -->
+      <div class="section-center">
+        <!-- single item -->
+        {% for doctor in doctors %}
+        <a href="{% url 'doctor' doctor.id %}">
+          <article class="menu-item">
+            <img src="{{ doctor.doc_image.url }}" alt="" class="photo" />
+            <div class="item-info">
+              <header>
+                <h4>{{doctor.name}}</h4>
+              </header>
+              <p class="item-text">
+                {{doctor.specialization}}
+                </p>
+              {% for deg in doctor.degree_set.all %}
+                <p class="item-text">
+                  {{deg.name}}, {{deg.institute}}
+                </p>
+              {% endfor %}
+            </div>
+          </article>
+        </a>
+        {% endfor %}
+        <!-- end of single item -->
+      </div>
+    </section>
+    <!-- javascript -->
+<!--    <script src="{% static 'js/doctors.js' %}"></script>-->
+  <script src="{% static 'js/alert.js' %}"></script>
+  </body>
+</html>

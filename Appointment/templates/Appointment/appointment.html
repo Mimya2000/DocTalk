@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Doctor Profile</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jost:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{% static 'styles/doctor-profile.css' %}" />
+    <link rel="stylesheet" href="{% static 'styles/navbar.css' %}" />
+    <link rel="stylesheet" href="{% static 'styles/alert.css' %}" />
+  </head>
+  <nav>
+      <ul>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'doctors' %}">Doctors</a></li>
+        <li><a href="{% url 'blogs' %}">Blogs</a></li>
+          {% if request.user.is_authenticated %}
+            <li><a href="{% url 'account' %}" >Account</a></li>
+            <li><a href="{% url 'my-appointments' %}" >My Appointments</a></li>
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+          {% else %}
+            <li><a href="{% url 'patient-signup' %}">Signup</a></li>
+            <li><a href="{% url 'login' %}">Login</a></li>
+            <li><a></a></li>
+          {% endif %}
+      </ul>
+    </nav>
+  <body>
+  {% include 'messages.html' %}
+    <div class="container">
+
+      <!-- Section 4 -->
+      <section class="section-4" id="section-4">
+        <h1 class="section-heading section-4-heading">Get An Appointment</h1>
+        <form class="contact-form center" method="POST" action="">
+           {% csrf_token %}
+          {% for field in form %}
+          <div class="form-control">
+            <label style="font-size: 30px;" >{{field.label}} :</label>
+            {{field}}
+            <p style="font-size: 15px; color: blue;">Date Format: YYYY-MM-DD</p>
+            <br>
+            <br>
+            <br>
+            <br>
+            {% for error in field.errors %}
+              <p style="color:red;"> {{error}} </p>
+            {% endfor %}
+          </div>
+          {% endfor %}
+          <input type="submit" value="Get An Appointment" class="contact-form-btn" />
+        </form>
+      </section>
+      <!-- End of Section 4 -->
+
+      <!-- Section 5 -->
+      <footer class="section-5 center">
+
+        <p class="copyright">
+          Copyright &copy; DocTalk. All Rights Reserved
+        </p>
+      </footer>
+      <!-- End of Section 5 -->
+    </div>
+
+<!--    <script src="{% static 'js/doctor-profile.js' %}"></script>-->
+  <script src="{% static 'js/alert.js' %}"></script>
+  </body>
+</html>
